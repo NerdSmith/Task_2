@@ -55,14 +55,7 @@ public class Main {
         return ((to.x - from.x == 1) || (to.y - from.y == 1)) && ((from.x != to.x) && (from.y != to.y));
     }
 
-
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.print("Enter the first coordinate: ");
-        ChessCoordinates firstCoordinate = translateCoord(scanner.next());
-        System.out.print("Enter the second coordinate: ");
-        ChessCoordinates secondCoordinate = translateCoord(scanner.next());
+    public static void figuresPrint(ChessCoordinates firstCoordinate, ChessCoordinates secondCoordinate){
         if (pawn(firstCoordinate, secondCoordinate)){
             System.out.print("Pawn ");
         }
@@ -81,6 +74,15 @@ public class Main {
         if (king(firstCoordinate, secondCoordinate)){
             System.out.print("King ");
         }
+    }
 
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the first coordinate: ");
+        ChessCoordinates firstCoordinate = translateCoord(scanner.next());
+        System.out.print("Enter the second coordinate: ");
+        ChessCoordinates secondCoordinate = translateCoord(scanner.next());
+        figuresPrint(firstCoordinate, secondCoordinate);
     }
 }
