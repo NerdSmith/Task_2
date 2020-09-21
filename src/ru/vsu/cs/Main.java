@@ -55,25 +55,27 @@ public class Main {
         return ((to.x - from.x == 1) || (to.y - from.y == 1)) && ((from.x != to.x) && (from.y != to.y));
     }
 
-    public static void figuresPrint(ChessCoordinates firstCoordinate, ChessCoordinates secondCoordinate){
+    public static String figuresSelection(ChessCoordinates firstCoordinate, ChessCoordinates secondCoordinate){
+        String result = "";
         if (pawn(firstCoordinate, secondCoordinate)){
-            System.out.print("Pawn ");
+            result += "Pawn ";
         }
         if (knight(firstCoordinate, secondCoordinate)){
-            System.out.print("Knight ");
+            result += "Knight ";
         }
         if (bishop(firstCoordinate, secondCoordinate)){
-            System.out.print("Bishop ");
+            result += "Bishop ";
         }
         if (castle(firstCoordinate, secondCoordinate)){
-            System.out.print("Castle ");
+            result += "Castle ";
         }
         if (queen(firstCoordinate, secondCoordinate)){
-            System.out.print("Queen ");
+            result += "Queen ";
         }
         if (king(firstCoordinate, secondCoordinate)){
-            System.out.print("King ");
+            result += "King ";
         }
+        return result;
     }
 
     public static void main(String[] args) {
@@ -83,6 +85,7 @@ public class Main {
         ChessCoordinates firstCoordinate = translateCoord(scanner.next());
         System.out.print("Enter the second coordinate: ");
         ChessCoordinates secondCoordinate = translateCoord(scanner.next());
-        figuresPrint(firstCoordinate, secondCoordinate);
+
+        System.out.print(figuresSelection(firstCoordinate, secondCoordinate));
     }
 }
