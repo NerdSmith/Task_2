@@ -39,24 +39,14 @@ public class Main {
 
     private static String selectFigures(ChessCoordinate firstCoordinate, ChessCoordinate secondCoordinate){
         String result = "";
-        if (checkPawn(firstCoordinate, secondCoordinate)){
-            result += "Pawn ";
-        }
-        if (checkKnight(firstCoordinate, secondCoordinate)){
-            result += "Knight ";
-        }
-        if (checkBishop(firstCoordinate, secondCoordinate)){
-            result += "Bishop ";
-        }
-        if (checkCastle(firstCoordinate, secondCoordinate)){
-            result += "Castle ";
-        }
-        if (checkQueen(firstCoordinate, secondCoordinate)){
-            result += "Queen ";
-        }
-        if (checkKing(firstCoordinate, secondCoordinate)){
-            result += "King ";
-        }
+
+        if (checkPawn(firstCoordinate, secondCoordinate)) result += "Pawn ";
+        if (checkKnight(firstCoordinate, secondCoordinate)) result += "Knight ";
+        if (checkBishop(firstCoordinate, secondCoordinate)) result += "Bishop ";
+        if (checkCastle(firstCoordinate, secondCoordinate)) result += "Castle ";
+        if (checkQueen(firstCoordinate, secondCoordinate)) result += "Queen ";
+        if (checkKing(firstCoordinate, secondCoordinate)) result += "King ";
+
         return result;
     }
 
