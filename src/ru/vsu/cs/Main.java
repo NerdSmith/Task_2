@@ -28,16 +28,16 @@ public class Main {
         return ((from.x != to.x) && (from.y == to.y)) || ((from.y != to.y) && (from.x == to.x));
     }
 
-    private static boolean queen(ChessCoordinate from, ChessCoordinate to){
+    private static boolean checkQueen(ChessCoordinate from, ChessCoordinate to){
         return checkCastle(from, to) || checkBishop(from, to);
     }
 
-    private static boolean king(ChessCoordinate from, ChessCoordinate to){
+    private static boolean checkKing(ChessCoordinate from, ChessCoordinate to){
         return ((Math.abs(to.x - from.x) <= 1) && (Math.abs(to.y - from.y) <= 1))
                 && ((from.x != to.x) || (from.y != to.y));
     }
 
-    private static String figuresSelection(ChessCoordinate firstCoordinate, ChessCoordinate secondCoordinate){
+    private static String selectFigures(ChessCoordinate firstCoordinate, ChessCoordinate secondCoordinate){
         String result = "";
         if (checkPawn(firstCoordinate, secondCoordinate)){
             result += "Pawn ";
@@ -51,10 +51,10 @@ public class Main {
         if (checkCastle(firstCoordinate, secondCoordinate)){
             result += "Castle ";
         }
-        if (queen(firstCoordinate, secondCoordinate)){
+        if (checkQueen(firstCoordinate, secondCoordinate)){
             result += "Queen ";
         }
-        if (king(firstCoordinate, secondCoordinate)){
+        if (checkKing(firstCoordinate, secondCoordinate)){
             result += "King ";
         }
         return result;
@@ -65,6 +65,6 @@ public class Main {
         ChessCoordinate firstCoordinate = enterCoordinate("first");
         ChessCoordinate secondCoordinate = enterCoordinate("second");
 
-        System.out.print(figuresSelection(firstCoordinate, secondCoordinate));
+        System.out.print(selectFigures(firstCoordinate, secondCoordinate));
     }
 }
