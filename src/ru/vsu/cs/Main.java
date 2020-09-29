@@ -4,69 +4,51 @@ import java.util.Scanner;
 
 public class Main {
 
-    private static ChessCoordinates translateCoordinates(String s){
-        int x = 1;
-        char firstChar = s.charAt(0);
-        int y = s.charAt(1) - '0';
+    private static ChessCoordinate enterCoordinate(String name) {
+        Scanner scanner = new Scanner(System.in);
 
-        switch (firstChar){
-            case 'a': x = 1;
-            break;
-            case 'b': x = 2;
-            break;
-            case 'c': x = 3;
-            break;
-            case 'd': x = 4;
-            break;
-            case 'e': x = 5;
-            break;
-            case 'f': x = 6;
-            break;
-            case 'g': x = 7;
-            break;
-            case 'h': x = 8;
-            break;
-        }
-        return new ChessCoordinates(x, y);
+        System.out.printf("Enter the %s coordinate: ", name);
+        return new ChessCoordinate(scanner.next());
     }
 
-    private static boolean pawn(ChessCoordinates from, ChessCoordinates to){
+    private static boolean checkPawn(ChessCoordinate from, ChessCoordinate to){
         return (from.x == to.x) && ((from.y+1 == to.y) || (from.y+2 == to.y));
     }
 
-    private static boolean knight(ChessCoordinates from, ChessCoordinates to){
+    private static boolean checkKnight(ChessCoordinate from, ChessCoordinate to){
         return (((from.x+1==to.x) || (from.x-1==to.x)) && ((from.y+2==to.y) || (from.y-2==to.y))) ||
                 (((from.x+2==to.x) || (from.x-2==to.x)) && ((from.y+1==to.y) || (from.y-1==to.y)));
     }
 
-    private static boolean bishop(ChessCoordinates from, ChessCoordinates to){
+    private static boolean checkBishop(ChessCoordinate from, ChessCoordinate to){
         return Math.abs(to.x - from.x) == Math.abs(to.y - from.y) && ((from.x != to.x) && (from.y != to.y));
     }
 
-    private static boolean castle(ChessCoordinates from, ChessCoordinates to){
+    private static boolean checkCastle(ChessCoordinate from, ChessCoordinate to){
         return ((from.x != to.x) && (from.y == to.y)) || ((from.y != to.y) && (from.x == to.x));
     }
 
-    private static boolean queen(ChessCoordinates from, ChessCoordinates to){
-        return castle(from, to) || bishop(from, to);
+    private static boolean queen(ChessCoordinate from, ChessCoordinate to){
+        return checkCastle(from, to) || checkBishop(from, to);
     }
 
-    private static boolean king(ChessCoordinates from, ChessCoordinates to){
-        return ((to.x - from.x == 1) || (to.y - from.y == 1)) && ((from.x != to.x) && (from.y != to.y));
+    private static boolean king(ChessCoordinate from, ChessCoordinate to){
+        return ((Math.abs(to.x - from.x) <= 1) && (Math.abs(to.y - from.y) <= 1))
+                && ((from.x != to.x) || (from.y != to.y));
     }
 
-    private static String figuresSelection(ChessCoordinates firstCoordinate, ChessCoordinates secondCoordinate){
+    private static String figuresSelection(ChessCoordinate firstCoordinate, ChessCoordinate secondCoordinate){
         String result = "";
-        if (pawn(firstCoordinate, secondCoordinate)){
+        if (checkPawn(firstCoordinate, secondCoordinate)){
             result += "Pawn ";
         }
-        if (knight(firstCoordinate, secondCoordinate)){
+        if (checkKnight(firstCoordinate, secondCoordinate)){
             result += "Knight ";
         }
-        if (bishop(firstCoordinate, secondCoordinate)){
+        if (checkBishop(firstCoordinate, secondCoordinate)){
             result += "Bishop ";
         }
-        if (castle(firstCoordinate, secondCoordinate)){
+        if (checkCastle(firstCoordinate, secondCoordinate)){
             result += "Castle ";
         }
         if (queen(firstCoordinate, secondCoordinate)){
@@ -79,12 +61,9 @@ public class Main {
     }
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
 
-        System.out.print("Enter the first coordinate: ");
-        ChessCoordinates firstCoordinate = translateCoordinates(scanner.next());
-        System.out.print("Enter the second coordinate: ");
-        ChessCoordinates secondCoordinate = translateCoordinates(scanner.next());
+        ChessCoordinate firstCoordinate = enterCoordinate("first");
+        ChessCoordinate secondCoordinate = enterCoordinate("second");
 
         System.out.print(figuresSelection(firstCoordinate, secondCoordinate));
     }
